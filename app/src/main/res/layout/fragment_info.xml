@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".registerfragments.InfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_info"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="100dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingresa tu nombre"
+            android:layout_marginStart="20dp"/>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textColor="@color/dark_blue"
+            android:background="@drawable/et_login_background"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingresa tu apellido paterno"
+            android:layout_marginStart="20dp"/>
+
+        <EditText
+            android:id="@+id/etLastnameP"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textColor="@color/dark_blue"
+            android:background="@drawable/et_login_background"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingresa tu apellido materno"
+            android:layout_marginStart="20dp"/>
+
+        <EditText
+            android:id="@+id/etLastnameM"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint=""
+            tools:text="hola"
+            android:textAlignment="center"
+            android:textColor="@color/dark_blue"
+            android:background="@drawable/et_login_background"
+            android:layout_marginHorizontal="20dp"/>
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:foreground="@drawable/ic_chevron_right"
+            android:foregroundTint="@color/white0"
+            android:background="@drawable/ic_chevron_left_background"
+            android:backgroundTint="@color/dark_blue"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</FrameLayout>

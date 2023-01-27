@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Morhealth</string>
+    <string name="signin_text">Iniciar Sesión</string>
+    <string name="signup_text">Registro</string>
+    <string name="forgot_password">Olvidaste tu contraseña?</string>
+
+    <string name="enter_username">Cuál es su usuario?</string>
+    <string name="enter_info">Ingrese su información</string>
+    <string name="select_gender">Cuál es tu género?</string>
+    <string name="enter_age">Indica tu edad</string>
+    <string name="enter_email">Ingresa tu correo de contacto</string>
+    <string name="enter_password">Ingresa tu contraseña</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
