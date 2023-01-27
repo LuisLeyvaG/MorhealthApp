@@ -8,6 +8,7 @@ open class Fragmentillo: Fragment() {
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
         transaction?.replace(R.id.fragmentContainer, fragment)
+        transaction?.addToBackStack(null)
         transaction?.commit()
     }
 }

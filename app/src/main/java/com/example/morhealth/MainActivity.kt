@@ -14,12 +14,10 @@ class MainActivity : AppCompatActivity() {
     fun goLogin(v: View) {
         val intent = Intent(this@MainActivity, LoginActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     fun goRegister(v: View) {
         val intent = Intent(this@MainActivity, RegisterActivity::class.java)
         startActivity(intent)
-        finish()
     }
 }

@@ -4,20 +4,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_main"
-            app:title="@string/bar_title"
-            app:titleTextColor="@color/white"
+            app:title="@string/app_name"
+            app:titleTextAppearance="@style/CustomTitleStyle"
+            app:titleCentered="true"
+            app:titleTextColor="@color/dark_blue"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/dark_blue"
             app:layout_scrollFlags="scroll|enterAlways"
             />
 

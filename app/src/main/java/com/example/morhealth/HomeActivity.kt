@@ -1,5 +1,6 @@
 package com.example.morhealth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.morhealth.databinding.ActivityHomeBinding
 import com.example.morhealth.databinding.ActivityLoginBinding
@@ -34,8 +36,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.bar_title, R.string.navigation_drawer_close)
-
         drawer.addDrawerListener(toggle)
+        //drawer.setScrimColor(resources.getColor(R.color.white))
         toggle.syncState()
 
     }
@@ -52,6 +54,57 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+
+        when (item.itemId) {
+            R.id.nav_item_home -> {
+                // do something
+            }
+            R.id.nav_item_notif -> {
+                goNotifActifity()
+            }
+            R.id.nav_item_calendar -> {
+                goCalendarActivity()
+            }
+            R.id.nav_item_profile -> {
+                goProfileActivity()
+            }
+            R.id.nav_item_settings -> {
+                goSettingsActivity()
+            }
+            R.id.nav_item_logout -> {
+                signOut()
+            }
+            R.id.nav_item_about -> {
+                // do something
+            }
+        }
+
+        drawer.closeDrawer(GravityCompat.START)
+
+        return true
+    }
+
+    private fun goNotifActifity() {
+        val intent = Intent(this, NotifActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goCalendarActivity() {
+        val intent = Intent(this, CalendarActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goProfileActivity() {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goSettingsActivity() {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun signOut() {
+
     }
 }
