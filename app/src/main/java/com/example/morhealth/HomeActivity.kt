@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -19,6 +21,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var drawer: DrawerLayout
+
+    private val TAG: String = "HomeActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.removeHeaderView(headerView)
         navigationView.addHeaderView(headerView)
 
+        var headerTitle: TextView = headerView.findViewById(R.id.tvNavName)
+        headerTitle.text = LoginActivity.user!!.name + " " + LoginActivity.user!!.lastname_p
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -60,7 +67,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // do something
             }
             R.id.nav_item_notif -> {
-                goNotifActifity()
+                goNotifActivity()
             }
             R.id.nav_item_calendar -> {
                 goCalendarActivity()
@@ -84,7 +91,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    private fun goNotifActifity() {
+    private fun goNotifActivity() {
         val intent = Intent(this, NotifActivity::class.java)
         startActivity(intent)
     }

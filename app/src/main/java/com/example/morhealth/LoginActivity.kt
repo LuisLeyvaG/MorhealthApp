@@ -6,16 +6,26 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.morhealth.data.ClientDAO
 import com.example.morhealth.databinding.ActivityLoginBinding
+import com.example.morhealth.domain.Client
 
 
 class LoginActivity : AppCompatActivity() {
+
+    companion object {
+        var user: Client? = null
+    }
 
     private lateinit var etUsername: EditText
     private lateinit var etPassword: EditText
 
     private lateinit var binding: ActivityLoginBinding
+
+    private lateinit var username: String
+    private lateinit var password: String
 
     private var TAG: String = "LoginActivity"
 
@@ -55,9 +65,26 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    fun signIn(v: View) {
+    private fun goHome() {
         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
         finish()
+    }
+
+    fun signIn(v: View) {
+        username = etUsername.text.toString()
+        password = etPassword.text.toString()
+        val clientDAO = ClientDAO(this)
+
+        if (clientDAO.validateLogin(username, password)) {
+
+            Toast.makeText(this, "Bienvenido $username", Toast.LENGTH_SHORT).show()
+            user = clientDAO.selectClient(username)!!
+            goHome()
+
+        } else {
+            Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+        }
     }
 }

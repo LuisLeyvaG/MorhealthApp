@@ -29,8 +29,8 @@ class GenderFragment : Fragmentillo() {
         binding.btnNext.setOnClickListener {
 
             when (binding.rgGender.checkedRadioButtonId) {
-                R.id.rbMale -> RegisterActivity.user.gender = 'M'
-                else -> RegisterActivity.user.gender = 'F'
+                R.id.rbMale -> RegisterActivity.user.gender = true
+                else -> RegisterActivity.user.gender = false
             }
 
             goAgeFragment()

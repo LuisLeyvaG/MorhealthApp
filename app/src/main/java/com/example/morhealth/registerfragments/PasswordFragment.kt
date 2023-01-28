@@ -1,5 +1,6 @@
 package com.example.morhealth.registerfragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -7,8 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.morhealth.LoginActivity
+import com.example.morhealth.MainActivity
 import com.example.morhealth.R
 import com.example.morhealth.RegisterActivity
+import com.example.morhealth.data.ClientDAO
 import com.example.morhealth.databinding.FragmentEmailBinding
 import com.example.morhealth.databinding.FragmentPasswordBinding
 
@@ -50,9 +55,12 @@ class PasswordFragment : Fragmentillo() {
         binding.btnNext.setOnClickListener {
 
             RegisterActivity.user.pswd = binding.etPassword.text.toString()
-
-
+            val act = activity as RegisterActivity
+            act.signUp()
 
         }
     }
+
+
+
 }

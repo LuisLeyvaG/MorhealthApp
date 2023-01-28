@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.morhealth.data.ClientDAO
 import com.example.morhealth.domain.Client
 import com.example.morhealth.registerfragments.*
 
@@ -24,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
         lateinit var fragmentPassword: PasswordFragment
 
         lateinit var user: Client
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,13 +45,32 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    fun goMain(v: View) {
+    fun signUp() {
+        val clientDAO = ClientDAO(this)
+        if (clientDAO.insertClient(user)) {
+            Toast.makeText(this, "Te has registrado con éxito", Toast.LENGTH_SHORT).show()
+            goLogin()
+            finish()
+        } else {
+            Toast.makeText(this, "Error al registrar", Toast.LENGTH_SHORT).show()
+            goMain()
+            finish()
+        }
+    }
+
+    fun goMain(v: View? = null) {
         val intent = Intent(this@RegisterActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    fun goUsernameFragment() {
+    private fun goLogin() {
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goUsernameFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragmentUsername)
         transaction.commit()
