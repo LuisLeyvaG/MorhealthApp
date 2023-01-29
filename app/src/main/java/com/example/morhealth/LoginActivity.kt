@@ -56,6 +56,9 @@ class LoginActivity : AppCompatActivity() {
                 etPassword.setSelection(start, end)
             }
         }
+
+        val clientDAO = ClientDAO(this)
+        Log.i(TAG, "Clients: ${clientDAO.selectClients()}")
     }
 
     // Ir a la pantalla principal

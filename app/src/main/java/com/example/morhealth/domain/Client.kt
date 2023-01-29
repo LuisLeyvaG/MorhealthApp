@@ -9,8 +9,6 @@ class Client(
     var age: Int? = null,
     var email: String? = null,
     var pswd: String? = null,
-    var clientImage: String? = null,
-    var description: String? = null
 ) {
     override fun toString(): String {
         return "Client{" +
@@ -22,7 +20,6 @@ class Client(
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", pswd='" + pswd + '\'' +
-                ", clientImage='" + clientImage + '\'' +
                 '}'
     }
 }

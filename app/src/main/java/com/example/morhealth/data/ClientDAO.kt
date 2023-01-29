@@ -24,17 +24,16 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
 
         val db = this.writableDatabase
 
-        var result = true
-
         try {
-            db.insert("users", null, data)
+            if (db.insert("users", null, data) == -1L) {
+                return false
+            }
         } catch (e: Exception) {
             e.printStackTrace()
-            result = false
         } finally {
             db.close()
-            return result
         }
+        return true
     }
 
     fun selectClient(username: String): Client? {
@@ -62,6 +61,38 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
             db.close()
         }
         return null
+    }
+
+    fun selectClients(): ArrayList<Client> {
+        SELECT_CLIENT = "SELECT * FROM users"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(SELECT_CLIENT, null)
+        val users = ArrayList<Client>()
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    val user = Client()
+                    user.apply {
+                        username = cursor.getString(1)
+                        name = cursor.getString(2)
+                        lastname_p = cursor.getString(3)
+                        lastname_m = cursor.getString(4)
+                        gender = cursor.getInt(5) == 1
+                        age = cursor.getInt(6)
+                        email = cursor.getString(7)
+                        pswd = cursor.getString(8)
+                        users.add(user)
+                    }
+                } while (cursor.moveToNext())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            cursor.close()
+            db.close()
+        }
+        return users
     }
 
     fun validateLogin(username: String, password: String): Boolean {

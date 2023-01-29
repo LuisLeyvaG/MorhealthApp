@@ -23,12 +23,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:padding="20dp">
+        android:paddingTop="20dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/circleImageView"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_marginHorizontal="20dp"
             app:shapeAppearanceOverlay="@style/circleImageView"
             android:src="@drawable/morhealth_avatar"/>
 
@@ -38,16 +39,54 @@
             android:layout_height="wrap_content"
             android:text="Luis Gerardo Leyva Garcia"
             android:layout_marginTop="15dp"
-            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/dark_blue"
             android:textSize="23sp"
             android:textStyle="bold|italic" />
 
-        <TextView
-            android:id="@+id/tvNavDesc"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:text="hola brou lorem erfbhhufufheufheufhfufheuhufehfeufhefuhufehufeufeufehufhufhufhuuehfuhefhfufhuefhfuefhufehfuehfuheufheu" />
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="center">
+
+            <ViewSwitcher
+                android:id="@+id/vsNavDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                >
+
+                <TextView
+                    android:id="@+id/tvNavDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="5dp"
+                    android:textSize="17sp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac magna vel ex placerat suscipit vel vel elit. Curabitur dapibus, neque." />
+
+                <EditText
+                    android:id="@+id/etNavDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="5dp"
+                    android:textSize="17sp"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at fringilla elit, in tempor metus. Nulla facilisi. Maecenas et libero libero."
+                    android:maxLength="120"
+                    android:background="@drawable/et_nav_desc_bg"/>
+
+            </ViewSwitcher>
+
+            <ImageView
+                android:id="@+id/ivEditDesc"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_edit_note"
+                app:tint="@color/gray"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>
