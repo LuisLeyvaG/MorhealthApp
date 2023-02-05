@@ -9,18 +9,10 @@ class Client(
     var age: Int? = null,
     var email: String? = null,
     var pswd: String? = null,
+    var premium: Boolean = false,
 ) {
     override fun toString(): String {
-        return "Client{" +
-                "username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", lastname_p='" + lastname_p + '\'' +
-                ", lastname_m='" + lastname_m + '\'' +
-                ", gender=" + gender +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                ", pswd='" + pswd + '\'' +
-                '}'
+        return "Client(username=$username, name=$name, lastname_p=$lastname_p, lastname_m=$lastname_m, gender=$gender, age=$age, email=$email, pswd=$pswd, premium=$premium)"
     }
 }
 

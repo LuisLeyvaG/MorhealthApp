@@ -6,7 +6,7 @@ import com.example.morhealth.domain.Client
 
 class ClientDAO(context: Context) : mySQLiteHelper(context) {
 
-    private val INSERT_CLIENT = "INSERT INTO users (username, name, lastname_p, lastname_m, gender, age, email, password) VALUES (username, name, lastname_p, lastname_m, gender, age, email, password)"
+    private val INSERT_CLIENT = "INSERT INTO users (username, name, lastname_p, lastname_m, gender, age, email, password, premium) VALUES (username, name, lastname_p, lastname_m, gender, age, email, password, premium)"
     private lateinit var SELECT_CLIENT: String
 
     fun insertClient(user: Client): Boolean {
@@ -20,6 +20,7 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
             put("age", user.age)
             put("email", user.email)
             put("password", user.pswd)
+            put("premium", user.premium)
         }
 
         val db = this.writableDatabase
@@ -51,7 +52,8 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
                     cursor.getInt(5) == 1,
                     cursor.getInt(6),
                     cursor.getString(7),
-                    cursor.getString(8)
+                    cursor.getString(8),
+                    cursor.getInt(9) == 1
                 )
             }
         } catch (e: Exception) {
@@ -82,6 +84,7 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
                         age = cursor.getInt(6)
                         email = cursor.getString(7)
                         pswd = cursor.getString(8)
+                        premium = cursor.getInt(9) == 1
                         users.add(user)
                     }
                 } while (cursor.moveToNext())
@@ -111,6 +114,12 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
             db.close()
         }
         return false
+    }
+
+    fun deleteAllRows() {
+        val db = this.writableDatabase
+        db.delete("users", null, null)
+        db.close()
     }
 
 }
