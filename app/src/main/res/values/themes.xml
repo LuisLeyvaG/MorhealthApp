@@ -31,5 +31,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_nav_color_state_list</item>
+        <item name="itemTextColor">@color/bottom_nav_color_state_list</item>
+        <item name="itemBackground">@drawable/bottom_nav_item_background</item>
+        <item name="backgroundTint">@color/navy_blue</item>
+    </style>
 
 </resources>

@@ -18,7 +18,7 @@ class UsernameFragment : Fragmentillo() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentUsernameBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root

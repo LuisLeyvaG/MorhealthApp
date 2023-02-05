@@ -23,4 +23,13 @@
     <string name="about">Acerca de</string>
     <string name="navigation_drawer_close">Cerrar</string>
     <string name="welcome">Bienvenido</string>
+    <string name="fitness">Fitness</string>
+    <string name="health">Salud</string>
+    <string name="heart_rate">Frecuencia Cardiaca</string>
+    <string name="dream_time">Tiempo de Sueño</string>
+    <string name="water">Agua Tomada</string>
+    <string name="day_steps">Pasos Diarios</string>
+    <string name="premium">Premium</string>
+    <string name="get_all_features">Obtener acceso a todas las funciones de la app</string>
+    <string name="gold_suscription">Suscripción ORO</string>
 </resources>

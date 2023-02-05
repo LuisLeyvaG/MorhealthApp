@@ -2,6 +2,8 @@ package com.example.morhealth
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.morhealth.databinding.ActivityHomeBinding
+import com.example.morhealth.homefragments.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -45,9 +48,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initPreferences()
         initToolbar()
         initNavigationView()
+        goHomeFragment()
 
     }
-
     private fun initToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
@@ -174,6 +177,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun goHomeFragment() {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, HomeFragment())
+        transaction.commit()
     }
 
     private fun signOut() {
