@@ -51,7 +51,7 @@
             android:layout_height="80dp"
             android:foreground="@drawable/ic_chevron_right"
             android:foregroundTint="@color/white0"
-            android:background="@drawable/ic_chevron_left_background"
+            android:background="@drawable/circle_bg"
             android:backgroundTint="@color/dark_blue"
             android:layout_marginTop="160dp"
             android:layout_gravity="center"/>

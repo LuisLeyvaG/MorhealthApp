@@ -32,4 +32,13 @@
     <string name="premium">Premium</string>
     <string name="get_all_features">Obtener acceso a todas las funciones de la app</string>
     <string name="gold_suscription">Suscripción ORO</string>
+    <string name="get_gold_features">Obtener acceso a las gráficas y estadísticas de tu sueño, agua y pasos diarios.</string>
+    <string name="see_more">Ver más</string>
+    <string name="my_health">Mi salud</string>
+    <string name="exercise">Ejercicio</string>
+    <string name="day_routine">Rutina de Hoy</string>
+    <string name="exercises">Ejercicios</string>
+    <string name="my_routines">Mis Rutinas</string>
+    <string name="my_records">Mis Records</string>
+    <string name="take_day_shot">Foto del día</string>
 </resources>

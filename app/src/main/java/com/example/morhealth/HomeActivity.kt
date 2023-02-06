@@ -20,6 +20,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.morhealth.databinding.ActivityHomeBinding
 import com.example.morhealth.homefragments.HomeFragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 
 
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var drawer: DrawerLayout
+    lateinit var appBarLayout: AppBarLayout
 
     private val TAG: String = "HomeActivity"
 
@@ -52,6 +54,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
     private fun initToolbar() {
+        appBarLayout = findViewById(R.id.app_bar_layout)
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
 
@@ -179,7 +182,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         finish()
     }
 
-    private fun goHomeFragment() {
+    public fun goHomeFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, HomeFragment())
         transaction.commit()

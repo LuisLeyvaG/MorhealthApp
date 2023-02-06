@@ -11,7 +11,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ic_chevron_left"
-        android:background="@drawable/ic_chevron_left_background"
+        android:background="@drawable/circle_bg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="20dp"
