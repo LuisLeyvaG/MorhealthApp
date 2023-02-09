@@ -38,4 +38,15 @@
         <item name="backgroundTint">@color/navy_blue</item>
     </style>
 
+    <style name="HealthFragmentMetricCard">
+        <item name="android:background">@drawable/rounded_rectangle</item>
+        <item name="android:backgroundTint">@color/navy_blue</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">25dp</item>
+        <item name="android:paddingBottom">25dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
 </resources>
