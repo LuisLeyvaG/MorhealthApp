@@ -12,9 +12,6 @@ import com.example.morhealth.domain.Client
 import com.example.morhealth.registerfragments.*
 
 class RegisterActivity : AppCompatActivity() {
-
-    val context = this
-
     companion object {
 
         lateinit var fragmentUsername: UsernameFragment

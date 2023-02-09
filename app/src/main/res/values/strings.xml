@@ -10,8 +10,7 @@
     <string name="enter_age">Indica tu edad</string>
     <string name="enter_email">Ingresa tu correo de contacto</string>
     <string name="enter_password">Ingresa tu contraseña</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="bar_title">Morhealth</string>
     <string name="home">Inicio</string>
     <string name="notifications">Notificaciones</string>
@@ -27,7 +26,7 @@
     <string name="health">Salud</string>
     <string name="heart_rate">Frecuencia Cardiaca</string>
     <string name="dream_time">Tiempo de Sueño</string>
-    <string name="water">Agua Tomada</string>
+    <string name="water">Agua Ingerida</string>
     <string name="day_steps">Pasos Diarios</string>
     <string name="premium">Premium</string>
     <string name="get_all_features">Obtener acceso a todas las funciones de la app</string>
@@ -41,4 +40,8 @@
     <string name="my_routines">Mis Rutinas</string>
     <string name="my_records">Mis Records</string>
     <string name="take_day_shot">Foto del día</string>
+    <string name="alimentation">Alimentación</string>
+    <string name="metrics">Métricas</string>
+    <string name="calories">Calorías</string>
+    <string name="calculator">Cálculos</string>
 </resources>

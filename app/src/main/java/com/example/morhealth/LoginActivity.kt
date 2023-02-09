@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
         if (clientDAO.validateLogin(username, password)) {
 
             Toast.makeText(this, "Bienvenido $username", Toast.LENGTH_SHORT).show()
-            user = clientDAO.selectClient(username)!!
+            user = clientDAO.selectClientByUsername(username)!!
             goHome()
 
         } else {

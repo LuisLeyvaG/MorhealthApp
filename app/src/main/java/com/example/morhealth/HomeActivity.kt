@@ -12,15 +12,19 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.ViewSwitcher
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.morhealth.databinding.ActivityHomeBinding
+import com.example.morhealth.homefragments.HealthFragment
 import com.example.morhealth.homefragments.HomeFragment
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
@@ -32,6 +36,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var appBarLayout: AppBarLayout
 
     private val TAG: String = "HomeActivity"
+
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var healthFragment: HealthFragment
+    //private lateinit var nutritionFragment: NutritionFragment
+    //private lateinit var fitnessFragment: FitnessFragment
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
@@ -47,11 +56,22 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        homeFragment = HomeFragment()
+        healthFragment = HealthFragment()
+        //nutritionFragment = NutritionFragment()
+        //fitnessFragment = FitnessFragment()
+
         initPreferences()
         initToolbar()
         initNavigationView()
-        goHomeFragment()
+        initBottomNavigationView()
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        setFragment(homeFragment)
     }
     private fun initToolbar() {
         appBarLayout = findViewById(R.id.app_bar_layout)
@@ -73,7 +93,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initNavigationView() {
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val navigationView: NavigationView = binding.navView
 
         navigationView.setNavigationItemSelectedListener(this)
 
@@ -90,6 +110,32 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val icon: ImageView = headerView.findViewById(R.id.ivEditDesc)
         icon.setOnClickListener { toggleDesc(icon) }
+    }
+
+    fun initBottomNavigationView() {
+        val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_home -> {
+                    setFragment(homeFragment)
+                    Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                }
+                R.id.action_health -> {
+                    setFragment(healthFragment)
+                    Toast.makeText(this, "Health", Toast.LENGTH_SHORT).show()
+                }
+                R.id.action_nutrition -> {
+                    Toast.makeText(this, "Nutrition", Toast.LENGTH_SHORT).show()
+                }
+                R.id.action_fitness -> {
+                    Toast.makeText(this, "Fitness", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(null)
     }
 
     private fun initPreferences() {
@@ -128,6 +174,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.action_health -> {
+                Toast.makeText(this, "Health", Toast.LENGTH_SHORT).show()
+            }
             R.id.nav_item_home -> {
                 // do something
             }
@@ -182,9 +231,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         finish()
     }
 
-    public fun goHomeFragment() {
+    private fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, HomeFragment())
+        transaction.replace(R.id.fragmentContainer, fragment)
         transaction.commit()
     }
 

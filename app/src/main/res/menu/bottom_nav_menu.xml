@@ -9,14 +9,20 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_dumbbell"
-        app:showAsAction="ifRoom"
-        android:title="@string/fitness" />
-
-    <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_health"
         android:icon="@drawable/ic_heart"
         app:showAsAction="ifRoom"
         android:title="@string/health" />
+
+    <item
+        android:id="@+id/action_nutrition"
+        android:icon="@drawable/ic_nutrition"
+        app:showAsAction="ifRoom"
+        android:title="@string/alimentation" />
+
+    <item
+        android:id="@+id/action_fitness"
+        android:icon="@drawable/ic_dumbbell"
+        app:showAsAction="ifRoom"
+        android:title="@string/fitness" />
 </menu>

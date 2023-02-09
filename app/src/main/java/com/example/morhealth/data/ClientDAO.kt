@@ -6,8 +6,10 @@ import com.example.morhealth.domain.Client
 
 class ClientDAO(context: Context) : mySQLiteHelper(context) {
 
-    private val INSERT_CLIENT = "INSERT INTO users (username, name, lastname_p, lastname_m, gender, age, email, password, premium) VALUES (username, name, lastname_p, lastname_m, gender, age, email, password, premium)"
-    private lateinit var SELECT_CLIENT: String
+    private val SELECT_CLIENTS = "SELECT * FROM users"
+    private val SELECT_CLIENT_BY_USERNAME_AND_PASSWORD = "SELECT * FROM users WHERE username = ? AND password = ?"
+    private val SELECT_CLIENT_BY_USERNAME = "SELECT * FROM users WHERE username = ?"
+    private val SELECT_CLIENT_ID_BY_USERNAME = "SELECT user_id FROM users WHERE username = ?"
 
     fun insertClient(user: Client): Boolean {
         val data = ContentValues()
@@ -37,10 +39,9 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
         return true
     }
 
-    fun selectClient(username: String): Client? {
-        SELECT_CLIENT = "SELECT * FROM users WHERE username = '$username'"
+    fun selectClientByUsername(username: String): Client? {
         val db = this.readableDatabase
-        val cursor = db.rawQuery(SELECT_CLIENT, null)
+        val cursor = db.rawQuery(SELECT_CLIENT_BY_USERNAME, arrayOf(username))
 
         try {
             if (cursor.moveToFirst()) {
@@ -53,7 +54,7 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
                     cursor.getInt(6),
                     cursor.getString(7),
                     cursor.getString(8),
-                    cursor.getInt(9) == 1
+                    cursor.getInt(9)
                 )
             }
         } catch (e: Exception) {
@@ -65,10 +66,26 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
         return null
     }
 
-    fun selectClients(): ArrayList<Client> {
-        SELECT_CLIENT = "SELECT * FROM users"
+    fun selectClientId(username: String): Int? {
         val db = this.readableDatabase
-        val cursor = db.rawQuery(SELECT_CLIENT, null)
+        val cursor = db.rawQuery(SELECT_CLIENT_ID_BY_USERNAME, arrayOf(username))
+
+        try {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(0)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            cursor.close()
+            db.close()
+        }
+        return null
+    }
+
+    fun selectClients(): ArrayList<Client> {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(SELECT_CLIENTS, null)
         val users = ArrayList<Client>()
 
         try {
@@ -84,7 +101,7 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
                         age = cursor.getInt(6)
                         email = cursor.getString(7)
                         pswd = cursor.getString(8)
-                        premium = cursor.getInt(9) == 1
+                        premium = cursor.getInt(9)
                         users.add(user)
                     }
                 } while (cursor.moveToNext())
@@ -99,9 +116,8 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
     }
 
     fun validateLogin(username: String, password: String): Boolean {
-        SELECT_CLIENT = "SELECT * FROM users WHERE username = '$username' AND password = '$password'"
         val db = this.readableDatabase
-        val cursor = db.rawQuery(SELECT_CLIENT, null)
+        val cursor = db.rawQuery(SELECT_CLIENT_BY_USERNAME_AND_PASSWORD, arrayOf(username, password))
 
         try {
             if (cursor.moveToFirst()) {

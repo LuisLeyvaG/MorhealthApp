@@ -29,6 +29,14 @@ open class mySQLiteHelper(context: Context): SQLiteOpenHelper(
                 "THEN RAISE (ABORT, 'Insert on table measurements violates foreign key constraint fk_measurement_metric_id') " +
                 "END; " +
                 "END;"
+        val metricInserts = arrayOf(
+            "INSERT INTO metrics (metric_name) VALUES ('heartRate')",
+            "INSERT INTO metrics (metric_name) VALUES ('steps')",
+            "INSERT INTO metrics (metric_name) VALUES ('dreamTime')",
+            "INSERT INTO metrics (metric_name) VALUES ('water')",
+            "INSERT INTO metrics (metric_name) VALUES ('calories')",
+            "INSERT INTO metrics (metric_name) VALUES ('weight')"
+        )
 
         try {
             db?.apply {
@@ -37,6 +45,10 @@ open class mySQLiteHelper(context: Context): SQLiteOpenHelper(
                 execSQL(createMeasurementsTable)
                 execSQL(createUserIdFK)
                 execSQL(createMetricIdFK)
+
+                for (metricInsert in metricInserts) {
+                   execSQL(metricInsert)
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -44,7 +56,7 @@ open class mySQLiteHelper(context: Context): SQLiteOpenHelper(
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        val dropTable = "DROP TABLE IF EXISTS user"
+        val dropTable = "DROP TABLE IF EXISTS users"
 
         try {
             p0?.execSQL(dropTable)
