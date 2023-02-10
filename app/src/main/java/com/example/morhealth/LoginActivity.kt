@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.morhealth.data.ClientDAO
 import com.example.morhealth.databinding.ActivityLoginBinding
 import com.example.morhealth.domain.Client
+import kotlinx.coroutines.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -29,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
     private var TAG: String = "LoginActivity"
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
         val clientDAO = ClientDAO(this)
         Log.i(TAG, "Clients: ${clientDAO.selectClients()}")
+
     }
 
     // Ir a la pantalla principal
@@ -76,18 +79,29 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun signIn(v: View) {
+        signIn()
+    }
+
+    private fun signIn() {
         username = etUsername.text.toString()
         password = etPassword.text.toString()
         val clientDAO = ClientDAO(this)
 
-        if (clientDAO.validateLogin(username, password)) {
-
-            Toast.makeText(this, "Bienvenido $username", Toast.LENGTH_SHORT).show()
-            user = clientDAO.selectClientByUsername(username)!!
-            goHome()
-
-        } else {
-            Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.Main).launch {
+            // Realiza la validación en un hilo en segundo plano
+            withContext(Dispatchers.IO) {
+                val isValid = clientDAO.validateLogin(username, password)
+                if (isValid) {
+                    user = clientDAO.selectClientByUsername(username)
+                    goHome()
+                } else {
+                    Toast.makeText(this@LoginActivity, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                    binding.progressBarLayout.visibility = View.GONE
+                }
+            }
         }
+
+        binding.progressBarLayout.visibility = View.VISIBLE
     }
+
 }

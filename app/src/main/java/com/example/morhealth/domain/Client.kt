@@ -1,6 +1,7 @@
 package com.example.morhealth.domain
 
 class Client(
+    var user_id: Int? = null,
     var username: String? = null,
     var name: String? = null,
     var lastname_p: String? = null,

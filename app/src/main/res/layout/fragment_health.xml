@@ -126,6 +126,7 @@
                 android:layout_marginTop="20dp">
 
                 <LinearLayout
+                    android:tag="heart_rate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_row="0"
@@ -135,7 +136,8 @@
                     android:layout_rowWeight="1"
                     android:layout_rowSpan="1"
                     android:orientation="vertical"
-                    style="@style/HealthFragmentMetricCard">
+                    style="@style/HealthFragmentMetricCard"
+                    android:onClick="goMetric">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -192,6 +194,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:tag="day_steps"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     style="@style/HealthFragmentMetricCard"
@@ -202,7 +205,8 @@
                     android:layout_columnSpan="1"
                     android:layout_rowWeight="1"
                     android:layout_rowSpan="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:onClick="goMetric">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -259,6 +263,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:tag="dream_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     style="@style/HealthFragmentMetricCard"
@@ -269,7 +274,8 @@
                     android:layout_columnSpan="1"
                     android:layout_rowWeight="1"
                     android:layout_rowSpan="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:onClick="goMetric">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -326,6 +332,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:tag="water"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/gray"
@@ -336,7 +343,8 @@
                     android:layout_columnSpan="1"
                     android:layout_rowWeight="1"
                     android:layout_rowSpan="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:onClick="goMetric">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -393,6 +401,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:tag="calories"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/navy_blue"
@@ -403,7 +412,8 @@
                     android:layout_columnSpan="1"
                     android:layout_rowWeight="1"
                     android:layout_rowSpan="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:onClick="goMetric">
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -26,6 +26,9 @@ import com.example.morhealth.homefragments.HomeFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -71,8 +74,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onStart() {
         super.onStart()
 
-        setFragment(homeFragment)
+        when (binding.bottomNavigationView.selectedItemId) {
+            R.id.action_home -> setFragment(homeFragment)
+            R.id.action_health -> setFragment(healthFragment)
+            //R.id.action_nutrition -> setFragment(nutritionFragment)
+            //R.id.action_fitness -> setFragment(fitnessFragment)
+            else -> setFragment(homeFragment)
+        }
     }
+
     private fun initToolbar() {
         appBarLayout = findViewById(R.id.app_bar_layout)
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
@@ -92,13 +102,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun initNavigationView() {
+    private fun initNavigationView() = GlobalScope.launch(Dispatchers.Main) {
         val navigationView: NavigationView = binding.navView
-
-        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setNavigationItemSelectedListener(this@HomeActivity)
 
         val headerView: View =
-            LayoutInflater.from(this).inflate(R.layout.nav_header_main, navigationView, false)
+            LayoutInflater.from(this@HomeActivity)
+                .inflate(R.layout.nav_header_main, navigationView, false)
         navigationView.removeHeaderView(headerView)
         navigationView.addHeaderView(headerView)
 
@@ -112,7 +122,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         icon.setOnClickListener { toggleDesc(icon) }
     }
 
-    fun initBottomNavigationView() {
+    private fun initBottomNavigationView() {
         val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -136,6 +146,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         bottomNavigationView.setOnNavigationItemReselectedListener(null)
+
     }
 
     private fun initPreferences() {
@@ -235,6 +246,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
         transaction.commit()
+    }
+
+    fun goMetric(v: View) {
+        val intent = Intent(this, MetricActivity::class.java)
+        intent.putExtra("metricTag", v.tag.toString())
+        startActivity(intent)
     }
 
     private fun signOut() {

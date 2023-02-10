@@ -11,7 +11,7 @@ open class mySQLiteHelper(context: Context): SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
 
         val createUsersTable = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(15) NOT NULL UNIQUE, name VARCHAR(20) NOT NULL, lastname_p VARCHAR(12) NOT NULL, lastname_m VARCHAR(12) NOT NULL, gender INTEGER NOT NULL, age INTEGER NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(20) NOT NULL, premium INTEGER NOT NULL)"
-        val createMetricTable = "CREATE TABLE metric (metric_id INTEGER PRIMARY KEY AUTOINCREMENT, metric_name VARCHAR(255) NOT NULL)"
+        val createMetricTable = "CREATE TABLE metrics (metric_id INTEGER PRIMARY KEY AUTOINCREMENT, metric_name VARCHAR(255) NOT NULL)"
         val createMeasurementsTable = "CREATE TABLE measurements (measurement_id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, metric_id INTEGER NOT NULL, value FLOAT NOT NULL, date_time TIMESTAMP NOT NULL, FOREIGN KEY (user_id) REFERENCES users(user_id), FOREIGN KEY (metric_id) REFERENCES metric(metric_id))"
         val createUserIdFK = "CREATE TRIGGER fk_measurement_user_id " +
                 "BEFORE INSERT ON measurements " +

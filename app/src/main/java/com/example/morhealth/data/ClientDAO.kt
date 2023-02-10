@@ -39,13 +39,29 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
         return true
     }
 
-    fun selectClientByUsername(username: String): Client? {
+    fun validateLogin(username: String, password: String): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(SELECT_CLIENT_BY_USERNAME_AND_PASSWORD, arrayOf(username, password))
+
+        return try {
+            cursor.moveToFirst()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        } finally {
+            cursor.close()
+            db.close()
+        }
+    }
+
+    fun selectClientByUsername(username: String): Client {
         val db = this.readableDatabase
         val cursor = db.rawQuery(SELECT_CLIENT_BY_USERNAME, arrayOf(username))
 
-        try {
+        return try {
             if (cursor.moveToFirst()) {
-                return Client(
+                Client(
+                    cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3),
@@ -56,15 +72,18 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
                     cursor.getString(8),
                     cursor.getInt(9)
                 )
+            } else {
+                throw Exception("Client not found")
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            throw e
         } finally {
             cursor.close()
             db.close()
         }
-        return null
     }
+
 
     fun selectClientId(username: String): Int? {
         val db = this.readableDatabase
@@ -113,23 +132,6 @@ class ClientDAO(context: Context) : mySQLiteHelper(context) {
             db.close()
         }
         return users
-    }
-
-    fun validateLogin(username: String, password: String): Boolean {
-        val db = this.readableDatabase
-        val cursor = db.rawQuery(SELECT_CLIENT_BY_USERNAME_AND_PASSWORD, arrayOf(username, password))
-
-        try {
-            if (cursor.moveToFirst()) {
-                return true
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            cursor.close()
-            db.close()
-        }
-        return false
     }
 
     fun deleteAllRows() {
