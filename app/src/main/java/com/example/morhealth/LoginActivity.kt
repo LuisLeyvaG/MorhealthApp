@@ -2,6 +2,7 @@ package com.example.morhealth
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
@@ -83,25 +84,33 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
+
+        binding.progressBarLayout.visibility = View.VISIBLE
+
+        CoroutineScope(Dispatchers.Main).launch {
+            // Realiza la validación en un hilo en segundo plano
+            //withContext(Dispatchers.IO) {
+                login()
+            //}
+        }
+    }
+
+    private suspend fun login() {
         username = etUsername.text.toString()
         password = etPassword.text.toString()
         val clientDAO = ClientDAO(this)
 
-        CoroutineScope(Dispatchers.Main).launch {
-            // Realiza la validación en un hilo en segundo plano
-            withContext(Dispatchers.IO) {
-                val isValid = clientDAO.validateLogin(username, password)
-                if (isValid) {
-                    user = clientDAO.selectClientByUsername(username)
-                    goHome()
-                } else {
-                    Toast.makeText(this@LoginActivity, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-                    binding.progressBarLayout.visibility = View.GONE
-                }
-            }
-        }
+        val isValid = clientDAO.validateLogin(username, password)
 
-        binding.progressBarLayout.visibility = View.VISIBLE
+        Handler().postDelayed({
+            if (isValid) {
+                user = clientDAO.selectClientByUsername(username)
+                goHome()
+            } else {
+                Toast.makeText(this@LoginActivity, "Usuario o Contraseña incorrectos", Toast.LENGTH_LONG).show()
+                binding.progressBarLayout.visibility = View.GONE
+            }
+        }, 1000)
     }
 
 }
