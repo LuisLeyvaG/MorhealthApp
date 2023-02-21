@@ -1,6 +1,7 @@
 package com.example.morhealth.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,9 @@ public class WaterAmountsAdapter extends BaseAdapter implements Serializable {
         label = view.findViewById(R.id.water_amount_label);
         value = view.findViewById(R.id.water_amount);
         imageView = view.findViewById(R.id.water_amount_icon);
-        linearLayout = view.findViewById(R.id.lyWaterAmount);
+        /*linearLayout = view.findViewById(R.id.lyWaterAmount);
+        int layoutColor = i % 2 == 0 ? context.getResources().getColor(R.color.navy_blue) : context.getResources().getColor(R.color.aqua_blue);
+        linearLayout.setBackgroundColor(layoutColor);*/
         label.setText(String.valueOf(list.get(i).getLabel() + ":"));
         value.setText(String.valueOf(list.get(i).getValue() + " ml"));
         imageView.setImageResource(list.get(i).getIcon());

@@ -1,11 +1,14 @@
 package com.example.morhealth
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.morhealth.adapters.MeasurementsListAdapter
 import com.example.morhealth.data.MeasurementDAO
 import com.example.morhealth.databinding.ActivityMetricBinding
 import com.example.morhealth.domain.Measurement
@@ -19,6 +22,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.security.AccessController.getContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,6 +39,8 @@ class MetricActivity : AppCompatActivity() {
 
     private lateinit var measurements: List<Measurement>
     private lateinit var last7measurements: List<Measurement>
+
+    private var measurementsExpanded: Boolean = false
 
     private var measurementDAO: MeasurementDAO = MeasurementDAO(this)
 
@@ -79,6 +85,7 @@ class MetricActivity : AppCompatActivity() {
             measurements = measurementDAO.selectAllUserMetricMeasurements(LoginActivity.user!!.user_id!!, metric_id)
             last7measurements = measurements.takeLast(7)
             initBarChart()
+            initMeasurementsListView()
 
         //}
     }
@@ -146,6 +153,34 @@ class MetricActivity : AppCompatActivity() {
 
     }
 
+    private fun initMeasurementsListView() {
+
+        binding.rlMeasurements.setOnClickListener {
+            val ivExpandMeasurement = binding.ivExpandMeasurements
+            val cvMeasurements = binding.cvMeasurements
+            val params = cvMeasurements.layoutParams
+             if (measurementsExpanded) {
+                 measurementsExpanded = false
+                 ivExpandMeasurement.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_expand_less))
+                 params.height = dpToPx(60, this)
+                 cvMeasurements.layoutParams = params
+            } else {
+                 measurementsExpanded = true
+                 ivExpandMeasurement.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_expand))
+                 params.height = dpToPx(300, this)
+                 cvMeasurements.layoutParams = params
+            }
+        }
+
+        val measurementsAdapter = MeasurementsListAdapter(measurements, this)
+        val lvMeasurementsList = binding.lvMeasurementsList
+
+        lvMeasurementsList.apply {
+            adapter = measurementsAdapter
+        }
+
+    }
+
     private fun initToolbar() {
         val toolbar = binding.toolbar as Toolbar
         setSupportActionBar(toolbar)
@@ -170,6 +205,11 @@ class MetricActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.fragmentContainer.id, waterFragment)
         transaction.commit()
+    }
+
+    private fun dpToPx(dp: Int, context: Context): Int {
+        val density = context.resources.displayMetrics.density
+        return (dp * density + 0.5f).toInt()
     }
 
     override fun onSupportNavigateUp(): Boolean {
