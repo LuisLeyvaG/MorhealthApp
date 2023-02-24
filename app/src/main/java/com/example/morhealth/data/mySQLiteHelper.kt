@@ -31,7 +31,7 @@ open class mySQLiteHelper(context: Context): SQLiteOpenHelper(
                 "END;"
         val metricInserts = arrayOf(
             "INSERT INTO metrics (metric_name) VALUES ('heartRate')",
-            "INSERT INTO metrics (metric_name) VALUES ('steps')",
+            "INSERT INTO metrics (metric_name) VALUES ('daySteps')",
             "INSERT INTO metrics (metric_name) VALUES ('dreamTime')",
             "INSERT INTO metrics (metric_name) VALUES ('water')",
             "INSERT INTO metrics (metric_name) VALUES ('calories')",

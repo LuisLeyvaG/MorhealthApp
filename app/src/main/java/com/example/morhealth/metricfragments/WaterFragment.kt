@@ -53,13 +53,6 @@ class WaterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         measurementDAO = MeasurementDAO(requireContext())
-        val measurements = measurementDAO.selectAllUserMetricMeasurements(
-            LoginActivity.user!!.user_id!!,
-            (activity as MetricActivity).metric_id
-        )
-        measurements.forEach {
-            Log.d("water_measurement", it.toString())
-        }
 
         initWaterAmounts()
 

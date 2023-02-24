@@ -118,7 +118,7 @@
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/heart_rate"
+                            android:text="@string/heartRate"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="italic" />
@@ -146,7 +146,7 @@
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/dream_time"
+                            android:text="@string/dreamTime"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="italic" />
@@ -203,7 +203,7 @@
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/day_steps"
+                            android:text="@string/daySteps"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="italic" />

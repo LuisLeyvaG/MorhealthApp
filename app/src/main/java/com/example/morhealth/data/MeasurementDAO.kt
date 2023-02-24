@@ -11,7 +11,7 @@ class MeasurementDAO(context: Context) : mySQLiteHelper(context) {
     private val SELECT_USER_METRIC_MEASUREMENTS = "SELECT * FROM measurements WHERE metric_id = ? AND user_id = ? ORDER BY date_time;"
     private val SELECT_LAST_USER_METRIC_MEASUREMENTS = "SELECT * FROM measurements WHERE metric_id = ? AND user_id = ? ORDER BY date_time DESC LIMIT ?;"
     private val SELECT_METRIC_ID_BY_NAME = "SELECT metric_id FROM metrics WHERE metric_name = ?"
-    private val UPDATE_MEASUREMENT = "UPDATE measurements SET value = ?, date_time = ? WHERE measurement_id = ?"
+    //private val UPDATE_MEASUREMENT = "UPDATE measurements SET value = ?, date_time = ? WHERE measurement_id = ?"
 
     fun insertMeasurement(measurement: Measurement): Boolean {
 

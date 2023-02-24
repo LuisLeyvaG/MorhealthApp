@@ -24,10 +24,10 @@
     <string name="welcome">Bienvenido</string>
     <string name="fitness">Fitness</string>
     <string name="health">Salud</string>
-    <string name="heart_rate">Frecuencia Cardiaca</string>
-    <string name="dream_time">Tiempo de Sueño</string>
+    <string name="heartRate">Frecuencia Cardiaca</string>
+    <string name="dreamTime">Tiempo de Sueño</string>
     <string name="water">Agua Ingerida</string>
-    <string name="day_steps">Pasos Diarios</string>
+    <string name="daySteps">Pasos Diarios</string>
     <string name="premium">Premium</string>
     <string name="get_all_features">Obtener acceso a todas las funciones de la app</string>
     <string name="gold_suscription">Suscripción ORO</string>
@@ -51,4 +51,5 @@
     <string name="date">Fecha</string>
     <string name="time">Hora</string>
     <string name="weight">Peso</string>
+    <string name="steps">pasos</string>
 </resources>

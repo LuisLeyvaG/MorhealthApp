@@ -12,6 +12,7 @@ import com.example.morhealth.adapters.MeasurementsListAdapter
 import com.example.morhealth.data.MeasurementDAO
 import com.example.morhealth.databinding.ActivityMetricBinding
 import com.example.morhealth.domain.Measurement
+import com.example.morhealth.metricfragments.StepsFragment
 import com.example.morhealth.metricfragments.WaterFragment
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -36,6 +37,7 @@ class MetricActivity : AppCompatActivity() {
     private lateinit var metricTag: String
 
     private lateinit var waterFragment: WaterFragment
+    private lateinit var stepsFragment: StepsFragment
 
     private lateinit var measurements: List<Measurement>
     private lateinit var last7measurements: List<Measurement>
@@ -58,6 +60,7 @@ class MetricActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         waterFragment = WaterFragment()
+        stepsFragment = StepsFragment()
 
         CoroutineScope(Dispatchers.Main).launch {
             // Realizar la consulta en un hilo en segundo plano
@@ -74,6 +77,7 @@ class MetricActivity : AppCompatActivity() {
 
         when (metricTag) {
             "water" -> goWaterFragment()
+            "daySteps" -> goStepsFragment()
             else -> Toast.makeText(this, "No hay fragmento", Toast.LENGTH_SHORT).show()
         }
     }
@@ -130,7 +134,7 @@ class MetricActivity : AppCompatActivity() {
             data = barData
             description.text = when (metricTag) {
                 "water" -> "agua"
-                else -> "Metric"
+                else -> "metric"
             }
             animateY(2000)
         }
@@ -194,6 +198,7 @@ class MetricActivity : AppCompatActivity() {
             val measurementDAO = MeasurementDAO(this)
             this.metricTag = intent.getStringExtra("metricTag")!!
             this.metric_id = measurementDAO.selectMetricIdByName(metricTag)
+            Log.i("METRIC_ID", this.metric_id.toString())
             this.metric_name = getString(resources.getIdentifier(metricTag, "string", packageName))
         } catch (e: Exception) {
             e.printStackTrace()
@@ -201,9 +206,15 @@ class MetricActivity : AppCompatActivity() {
         }
     }
 
-    fun goWaterFragment() {
+    private fun goWaterFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.fragmentContainer.id, waterFragment)
+        transaction.commit()
+    }
+
+    private fun goStepsFragment() {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(binding.fragmentContainer.id, stepsFragment)
         transaction.commit()
     }
 
