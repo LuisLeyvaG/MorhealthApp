@@ -1,6 +1,10 @@
 package com.example.morhealth.metricfragments
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
+import android.content.IntentSender.SendIntentException
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -8,21 +12,24 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.morhealth.LoginActivity
 import com.example.morhealth.MetricActivity
 import com.example.morhealth.MetricActivity.Companion.isToday
-import com.example.morhealth.R
-import com.example.morhealth.data.ClientDAO
 import com.example.morhealth.data.MeasurementDAO
 import com.example.morhealth.databinding.FragmentStepsBinding
-import com.example.morhealth.databinding.FragmentWaterBinding
 import com.example.morhealth.domain.Measurement
-
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.fitness.Fitness
+import com.google.android.gms.fitness.FitnessOptions
+import com.google.android.gms.fitness.data.DataPoint
+import com.google.android.gms.fitness.request.OnDataPointListener
+import java.util.*
 class StepsFragment : Fragment(), SensorEventListener {
 
     private lateinit var binding: FragmentStepsBinding

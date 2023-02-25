@@ -40,13 +40,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private val TAG: String = "HomeActivity"
 
-    private lateinit var homeFragment: HomeFragment
-    private lateinit var healthFragment: HealthFragment
-    //private lateinit var nutritionFragment: NutritionFragment
-    //private lateinit var fitnessFragment: FitnessFragment
-
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+
+    companion object {
+        lateinit var homeFragment: HomeFragment
+        lateinit var healthFragment: HealthFragment
+        //lateinit var nutritionFragment: NutritionFragment
+        //lateinit var fitnessFragment: FitnessFragment
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -242,7 +244,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         finish()
     }
 
-    private fun setFragment(fragment: Fragment) {
+     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
         transaction.commit()
